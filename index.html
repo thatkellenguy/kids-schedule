@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids Games Schedule</title>
+<style>
+  :root {
+    --bg: #f7f5f2;
+    --card-bg: #ffffff;
+    --text: #23201c;
+    --text-muted: #6b6459;
+    --border: #e7e2da;
+    --accent-soccer: #2f7d4f;
+    --accent-soccer-bg: #e6f2ea;
+    --accent-baseball: #b5501f;
+    --accent-baseball-bg: #fbece0;
+    --pill-practice: #6b6459;
+    --pill-practice-bg: #ece8e1;
+    --today-ring: #d98a2b;
+    --shadow: 0 1px 2px rgba(30,25,15,0.06), 0 1px 8px rgba(30,25,15,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1916;
+      --card-bg: #262320;
+      --text: #f1ede6;
+      --text-muted: #a89f91;
+      --border: #38342e;
+      --accent-soccer: #6fc78f;
+      --accent-soccer-bg: #203228;
+      --accent-baseball: #e39a63;
+      --accent-baseball-bg: #362419;
+      --pill-practice: #b8ae9d;
+      --pill-practice-bg: #322e28;
+      --today-ring: #e3a13d;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 8px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1916;
+    --card-bg: #262320;
+    --text: #f1ede6;
+    --text-muted: #a89f91;
+    --border: #38342e;
+    --accent-soccer: #6fc78f;
+    --accent-soccer-bg: #203228;
+    --accent-baseball: #e39a63;
+    --accent-baseball-bg: #362419;
+    --pill-practice: #b8ae9d;
+    --pill-practice-bg: #322e28;
+    --today-ring: #e3a13d;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 8px rgba(0,0,0,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    padding: 24px 16px 64px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { margin-bottom: 24px; }
+  h1 {
+    font-size: 1.6rem;
+    margin: 0 0 4px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+
+  .legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 16px 0 28px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.soccer { background: var(--accent-soccer); }
+  .dot.baseball { background: var(--accent-baseball); }
+  .dot.practice { background: var(--pill-practice); }
+
+  .week-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 28px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .week-label:first-of-type { margin-top: 0; }
+
+  .day-group { margin-bottom: 14px; }
+  .day-header {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 8px 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .day-header .date-num { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
+
+  .event-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .event-icon {
+    font-size: 1.3rem;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .event-icon.soccer { background: var(--accent-soccer-bg); }
+  .event-icon.baseball { background: var(--accent-baseball-bg); }
+
+  .event-info { flex: 1; min-width: 0; }
+  .event-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .event-meta {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .pill {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill.game { color: var(--accent-soccer); background: var(--accent-soccer-bg); }
+  .pill.game.baseball-pill { color: var(--accent-baseball); background: var(--accent-baseball-bg); }
+  .pill.practice { color: var(--pill-practice); background: var(--pill-practice-bg); }
+
+  .kid-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text);
+    opacity: 0.55;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>⚽🧢 Kids Games Schedule</h1>
+    <p class="subtitle">Wes &amp; Jack — soccer &amp; baseball, Sept–Oct 2026</p>
+    <div class="legend">
+      <span class="legend-item"><span class="dot soccer"></span>Soccer</span>
+      <span class="legend-item"><span class="dot baseball"></span>Baseball</span>
+    </div>
+  </header>
+
+  <div id="schedule"></div>
+
+  <footer>Pulled from the Altenhofen Family Calendar</footer>
+</div>
+
+<script>
+const events = [
+  {d:"2026-09-13",t:"16:00",end:"18:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Kern Park"},
+  {d:"2026-09-15",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-09-17",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-09-19",t:"09:00",end:"10:00",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Ed Benedict Park"},
+  {d:"2026-09-19",t:"15:00",end:"16:00",sport:"soccer",kind:"Game",who:"Jack",title:"Soccer",loc:"Parkrose High School"},
+  {d:"2026-09-20",t:"13:00",end:"15:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Kern Park"},
+  {d:"2026-09-22",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-09-24",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-09-26",t:"09:00",end:"10:00",sport:"soccer",kind:"Game",who:"Jack",title:"Soccer",loc:"Holy Redeemer Catholic School"},
+  {d:"2026-09-26",t:"13:40",end:"14:40",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Ed Benedict Park"},
+  {d:"2026-09-27",t:"10:00",end:"12:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Kern Park"},
+  {d:"2026-09-29",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-01",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-03",t:"11:20",end:"12:20",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Brentwood City Park"},
+  {d:"2026-10-04",t:"13:00",end:"15:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Kern Park"},
+  {d:"2026-10-06",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-08",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-10",t:"10:00",end:"11:00",sport:"soccer",kind:"Game",who:"Jack + Wes",title:"Soccer",loc:"Ed Benedict Park"},
+  {d:"2026-10-11",t:"16:00",end:"18:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Kern Park"},
+  {d:"2026-10-13",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-15",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-17",t:"11:00",end:"12:00",sport:"soccer",kind:"Game",who:"Jack",title:"Soccer",loc:"Parkrose High School"},
+  {d:"2026-10-17",t:"12:30",end:"13:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Irving Park"},
+  {d:"2026-10-18",t:"16:00",end:"18:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Essex Park"},
+  {d:"2026-10-20",t:"17:15",end:"18:30",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-22",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-24",t:"09:00",end:"10:00",sport:"soccer",kind:"Game",who:"Jack",title:"Soccer",loc:"Fernhill Park"},
+  {d:"2026-10-24",t:"11:20",end:"12:20",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Overlook Park"},
+  {d:"2026-10-25",t:"16:00",end:"18:00",sport:"baseball",kind:"Game",who:"Wes",title:"Baseball",loc:"Essex Park"},
+  {d:"2026-10-29",t:"17:15",end:"18:15",sport:"soccer",kind:"Game",who:"Wes",title:"Soccer",loc:"Glencoe Elementary School"},
+  {d:"2026-10-31",t:"10:00",end:"11:00",sport:"soccer",kind:"Game",who:"Jack",title:"Soccer",loc:"Ed Benedict Park"}
+];
+
+function fmtTime(t) {
+  const [h, m] = t.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  let h12 = h % 12; if (h12 === 0) h12 = 12;
+  return `${h12}:${m.toString().padStart(2,"0")} ${period}`;
+}
+
+function weekLabel(dateObj) {
+  const monday = new Date(dateObj);
+  const day = monday.getDay();
+  const diff = (day === 0 ? -6 : 1) - day;
+  monday.setDate(monday.getDate() + diff);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const opts = { month: "short", day: "numeric" };
+  return `Week of ${monday.toLocaleDateString("en-US", opts)} – ${sunday.toLocaleDateString("en-US", opts)}`;
+}
+
+const container = document.getElementById("schedule");
+let lastWeek = null;
+let lastDay = null;
+let dayDiv = null;
+
+events
+  .sort((a,b) => (a.d+a.t).localeCompare(b.d+b.t))
+  .forEach(ev => {
+    const dateObj = new Date(ev.d + "T00:00:00");
+    const wk = weekLabel(dateObj);
+    if (wk !== lastWeek) {
+      const wl = document.createElement("div");
+      wl.className = "week-label";
+      wl.textContent = wk;
+      container.appendChild(wl);
+      lastWeek = wk;
+      lastDay = null;
+    }
+    if (ev.d !== lastDay) {
+      dayDiv = document.createElement("div");
+      dayDiv.className = "day-group";
+      const h = document.createElement("div");
+      h.className = "day-header";
+      const weekday = dateObj.toLocaleDateString("en-US", { weekday: "long" });
+      const monthDay = dateObj.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+      h.innerHTML = `${weekday} <span class="date-num">${monthDay}</span>`;
+      dayDiv.appendChild(h);
+      container.appendChild(dayDiv);
+      lastDay = ev.d;
+    }
+
+    const card = document.createElement("div");
+    card.className = "event-card";
+
+    const icon = document.createElement("div");
+    icon.className = `event-icon ${ev.sport}`;
+    icon.textContent = ev.sport === "soccer" ? "⚽" : "⚾";
+    card.appendChild(icon);
+
+    const info = document.createElement("div");
+    info.className = "event-info";
+
+    const titleRow = document.createElement("p");
+    titleRow.className = "event-title";
+    titleRow.innerHTML = `${ev.who}: ${ev.title}`;
+    info.appendChild(titleRow);
+
+    const meta = document.createElement("p");
+    meta.className = "event-meta";
+    meta.textContent = `${fmtTime(ev.t)} – ${fmtTime(ev.end)} · ${ev.loc}`;
+    info.appendChild(meta);
+
+    card.appendChild(info);
+    dayDiv.appendChild(card);
+  });
+</script>
+</body>
+</html>
