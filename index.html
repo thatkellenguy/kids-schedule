@@ -138,6 +138,7 @@
     align-items: center;
     justify-content: center;
   }
+  .event-icon { background: var(--pill-practice-bg); }
   .event-icon.soccer { background: var(--accent-soccer-bg); }
   .event-icon.baseball { background: var(--accent-baseball-bg); }
   .event-icon.basketball { background: var(--accent-basketball-bg); }
@@ -178,6 +179,14 @@
     font-weight: 700;
     color: var(--text);
     opacity: 0.55;
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px 16px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
   }
 
   footer {
@@ -235,12 +244,23 @@ function weekLabel(dateObj) {
   return `Week of ${monday.toLocaleDateString("en-US", opts)} – ${sunday.toLocaleDateString("en-US", opts)}`;
 }
 
+const ICONS = {basketball:"🏀", soccer:"⚽", baseball:"⚾", softball:"🥎", football:"🏈",
+               volleyball:"🏐", hockey:"🏒", lacrosse:"🥍", swimming:"🏊", tennis:"🎾"};
+
+// Hide games from earlier days, even between daily refreshes.
+const now = new Date();
+const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+const upcoming = events.filter(ev => ev.d >= todayStr);
+
 const container = document.getElementById("schedule");
+if (upcoming.length === 0) {
+  container.innerHTML = '<div class="empty">No upcoming games on the calendar right now.</div>';
+}
 let lastWeek = null;
 let lastDay = null;
 let dayDiv = null;
 
-events
+upcoming
   .sort((a,b) => (a.d+a.t).localeCompare(b.d+b.t))
   .forEach(ev => {
     const dateObj = new Date(ev.d + "T00:00:00");
@@ -271,7 +291,7 @@ events
 
     const icon = document.createElement("div");
     icon.className = `event-icon ${ev.sport}`;
-    icon.textContent = {soccer:"⚽", baseball:"⚾", basketball:"🏀"}[ev.sport] || "🏅";
+    icon.textContent = ICONS[ev.sport] || "🏅";
     card.appendChild(icon);
 
     const info = document.createElement("div");
