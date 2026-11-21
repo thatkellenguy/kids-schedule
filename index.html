@@ -170,6 +170,7 @@
   }
   .pill.game { color: var(--accent-soccer); background: var(--accent-soccer-bg); }
   .pill.game.baseball-pill { color: var(--accent-baseball); background: var(--accent-baseball-bg); }
+  .pill.game.basketball-pill { color: var(--accent-basketball); background: var(--accent-basketball-bg); }
   .pill.practice { color: var(--pill-practice); background: var(--pill-practice-bg); }
 
   .kid-tag {
@@ -193,8 +194,8 @@
     <h1>🏀 Kids Basketball Schedule</h1>
     <p class="subtitle">Wes &amp; Jack — Atkinson basketball, Nov 2026 – Feb 2027</p>
     <div class="legend">
-      <span class="legend-item"><span class="dot jack"></span>Jack · Mondays</span>
-      <span class="legend-item"><span class="dot wes"></span>Wes · Tuesdays</span>
+      <span class="legend-item"><span class="dot jack"></span>Jack</span>
+      <span class="legend-item"><span class="dot wes"></span>Wes</span>
     </div>
   </header>
 
@@ -205,40 +206,46 @@
 
 <script>
 const events = [
-  {d:"2026-11-02",t:"17:00",end:"18:00",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-03",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-09",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-10",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-16",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-17",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-23",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-24",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-11-30",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-01",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-07",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-08",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-14",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-15",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-21",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-22",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-28",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2026-12-29",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-04",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-05",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-11",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-12",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-18",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-19",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-25",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-01-26",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-01",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-02",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-08",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-09",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-15",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-16",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-22",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",title:"Atkinson Basketball",loc:""},
-  {d:"2027-02-23",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",title:"Atkinson Basketball",loc:""}
+  {d:"2026-11-02",t:"17:00",end:"18:00",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-03",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-09",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-10",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-16",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-17",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-23",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-24",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-30",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-01",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-07",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-08",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-14",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-15",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-21",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-22",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-28",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-12-29",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-04",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-05",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-11",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-12",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-18",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-19",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-25",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-01-26",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-01",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-02",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-08",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-09",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-15",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-16",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-22",t:"16:30",end:"17:30",sport:"basketball",who:"Jack",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2027-02-23",t:"17:00",end:"18:00",sport:"basketball",who:"Wes",kind:"Practice",title:"Atkinson Basketball",loc:""},
+  {d:"2026-11-01",t:"15:00",end:"16:30",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"},
+  {d:"2026-11-08",t:"15:00",end:"16:30",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"},
+  {d:"2026-11-15",t:"15:00",end:"16:30",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"},
+  {d:"2026-11-22",t:"14:15",end:"15:45",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"},
+  {d:"2026-11-29",t:"14:15",end:"15:45",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"},
+  {d:"2026-12-06",t:"14:15",end:"15:45",sport:"basketball",who:"Jack",kind:"Game",title:"Basketball",loc:"Parkrose Middle School"}
 ];
 
 function fmtTime(t) {
@@ -303,7 +310,13 @@ events
 
     const titleRow = document.createElement("p");
     titleRow.className = "event-title";
-    titleRow.innerHTML = `${ev.who}: ${ev.title}`;
+    titleRow.textContent = `${ev.who}: ${ev.title}`;
+    if (ev.kind) {
+      const pill = document.createElement("span");
+      pill.className = ev.kind === "Game" ? `pill game ${ev.sport}-pill` : "pill practice";
+      pill.textContent = ev.kind;
+      titleRow.appendChild(pill);
+    }
     info.appendChild(titleRow);
 
     const meta = document.createElement("p");
