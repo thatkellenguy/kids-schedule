@@ -1,8 +1,11 @@
 name: Update games schedule
 
-# Adds a "Run workflow" button on the repo's Actions tab.
 on:
+  # "Run workflow" button on the repo's Actions tab.
   workflow_dispatch:
+  # Every morning at 14:50 UTC = 6:50 AM Pacific (7:50 AM during daylight time, Mar–Nov).
+  schedule:
+    - cron: "50 14 * * *"
 
 permissions:
   contents: write
