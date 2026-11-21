@@ -131,13 +131,14 @@ def collect_games(cal):
             "kind": "Game",
             "title": sport.capitalize() if sport != "sports" else "Game",
             "loc": str(ev.get("LOCATION", "")).split(",")[0].strip(),  # place name only
+            "addr": " ".join(str(ev.get("LOCATION", "")).split()),      # full address for maps
         }
         games[(item["d"], item["t"], item["who"], sport)] = item  # de-duplicate
     return sorted(games.values(), key=lambda g: (g["d"], g["t"], g["who"]))
 
 
 def render(games) -> str:
-    keys = ["d", "t", "end", "sport", "who", "kind", "title", "loc"]
+    keys = ["d", "t", "end", "sport", "who", "kind", "title", "loc", "addr"]
     rows = []
     for g in games:
         fields = ",".join(f"{k}:{json.dumps(g[k], ensure_ascii=False)}" for k in keys)

@@ -162,6 +162,14 @@
     overflow-wrap: anywhere;
   }
 
+  .map-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+  }
+  .map-link:hover { color: var(--text); text-decoration-style: solid; }
+
   .pill {
     font-size: 0.68rem;
     font-weight: 600;
@@ -307,7 +315,17 @@ upcoming
 
     const meta = document.createElement("p");
     meta.className = "event-meta";
-    meta.textContent = `${fmtTime(ev.t)} – ${fmtTime(ev.end)}` + (ev.loc ? ` · ${ev.loc}` : "");
+    meta.textContent = `${fmtTime(ev.t)} – ${fmtTime(ev.end)}`;
+    if (ev.loc) {
+      meta.append(" · ");
+      const a = document.createElement("a");
+      a.className = "map-link";
+      a.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ev.addr || ev.loc);
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "📍 " + ev.loc;
+      meta.appendChild(a);
+    }
     info.appendChild(meta);
 
     card.appendChild(info);
