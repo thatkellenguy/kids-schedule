@@ -100,7 +100,7 @@ def collect_games(cal):
             "who": kid,
             "kind": "Game",
             "title": SPORT.capitalize(),
-            "loc": str(ev.get("LOCATION", "")).strip(),
+            "loc": str(ev.get("LOCATION", "")).split(",")[0].strip(),  # place name only
         }
         games[(item["d"], item["t"], kid)] = item  # de-duplicate
     # Kids playing at the same place and time show as one card ("Jack + Wes").
